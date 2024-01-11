@@ -10,7 +10,7 @@ Finally, this'll provide us with insights on your working style.
 
 You have 2 days to complete the challenge. Though realistically, this shouldn't take you more than 4 hours.
 
-Please fork this and once you complete, send us back the forked link to nafhul@99.co, dian.baghawan@99.co, priyandiono@99.co and ilmiyantif@99.co.
+Please fork this and once you complete, send us back the forked link to nafhul.arsyad@99.co, dian.baghawan@99.co, priyandiono@99.co and ilmiyantif@99.co.
 
 As an alternative, you can do the challenge in a Next.js environment, publish it to Vercel and send the public repository link instead.
 
@@ -20,7 +20,7 @@ As an alternative, you can do the challenge in a Next.js environment, publish it
 
 1. Implement the [following design](https://www.figma.com/file/zT67hKBce1jfyZPkx5cGrg/FE-challenge---Project-card-design).
 
-2. Use the https://cm9pv7-3000.csb.app/mock-api.json (or the equivalent public url of your fork, something like `${yourSandboxUrl}/mock-api.json`)as the mock data source
+2. Use the https://storage.googleapis.com/core-asset/static/test/mock-api.json (or the equivalent public url of your fork, something like `${yourSandboxUrl}/mock-api.json`)as the mock data source
 
 Notes:
 
