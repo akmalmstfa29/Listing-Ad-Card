@@ -1,11 +1,12 @@
-"use client";
-
 import "./globals.css";
-import { Inter } from "next/font/google";
-import StyledComponentsRegistry from "./lib/registry";
+import StyledComponentsRegistry from "../lib/registry";
 import GlobalStyles from "./styles/GlobalStyles";
 
-const inter = Inter({ subsets: ["latin"] });
+
+export const metadata = {
+  title: "Listing Ad Card",
+  description: "Listing Ad Card",
+};
 
 export default function RootLayout({
   children,
@@ -14,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <StyledComponentsRegistry>
           <GlobalStyles />
           {children}
