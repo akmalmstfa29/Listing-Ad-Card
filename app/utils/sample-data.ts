@@ -1,7 +1,7 @@
 import { Property } from '../interfaces'
 
 export const samplePropertyData: Property = {
-  pic: ["https://images.prismic.io/99-content/dc1594fb-f413-44ff-b8b5-c3ba6cd539cd_vbWkNuxt2hjgidVttoMRDX.jpg?auto=compress,format&w=2000&q=100"],
+  pic: ["https://images.prismic.io/99-content/dc1594fb-f413-44ff-b8b5-c3ba6cd539cd_vbWkNuxt2hjgidVttoMRDX.jpg?auto=compress,format&w=2000&q=100", "https://images.prismic.io/slicemachine-blank/dcea6535-f43b-49a7-8623-bf281aaf1cb2_roller-skating.png?auto=compress,format&w=2000&q=100"],
   title: "Forett At Bukit Timah",
   address: "70 Anchorvale Crescent · D21",
   project_type: "Condo",

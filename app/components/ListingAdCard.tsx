@@ -2,9 +2,10 @@
 
 import React from "react";
 import reactStringReplace from "react-string-replace";
+import { v4 as uuidv4 } from 'uuid';
 import styled from "styled-components";
 import { Property } from "../interfaces";
-import { hidePhoneNumber, USDFormat } from "../utils/helpers";
+import { hidePhoneNumber, updateQueryString, USDFormat } from "../utils/helpers";
 import Image from 'next/image'
 
 type ListingAdCardProps = {
@@ -18,6 +19,7 @@ const Wrapper = styled.div`
   position: relative;
   box-shadow: 0px 4px 16px rgba(11, 17, 52, 0.2);
   border-radius: 4px;
+  transition: background-image 0.5s ease-in-out;
   margin: 10px;
 `
 
@@ -29,7 +31,6 @@ const MainPicWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 17px;
   border-radius: 4px 4px 0px 0px;
 
   &:hover {
@@ -49,6 +50,14 @@ const LaunchingSoonFlag = styled(Image)`
   left: -4px;
   width: 134px;
   height: auto;
+`
+
+const Arrow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 10%;
 `
 
 const MainContent  = styled.div`
@@ -210,10 +219,13 @@ const ListingAdCard = ({ data }: ListingAdCardProps) => {
   const arrowRight = require("../assets/icons/chevron-right.png");
   const arrowLeft = require("../assets/icons/chevron-left.png");
   const buildingIcon = require("../assets/icons/building.png");
-  const secureDescription = reactStringReplace(hidePhoneNumber(description), "\n", () => <br />)
+  const secureDescription = reactStringReplace(hidePhoneNumber(description), "\n", () => <br key={uuidv4()} />)
 
   const [showDescription, setShowDescription] = React.useState(true);
   const [showArrow, setShowArrow] = React.useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
 
   const toggleDescription = () => {
     setShowDescription(!showDescription);
@@ -223,28 +235,51 @@ const ListingAdCard = ({ data }: ListingAdCardProps) => {
     setShowDescription(false);
   }, []);
 
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % pic.length);
+  };
+
+  const prevImage = () => {
+    console.log('here');
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + pic.length) % pic.length);
+  };
+
+  const thumbnail = () => {
+    let updatedUrl;
+    if (wrapperRef.current) {
+      const wrapperWidth = wrapperRef.current.offsetWidth;
+      updatedUrl = updateQueryString(pic[currentImageIndex], { w: String(wrapperWidth) });
+    }
+
+    return updatedUrl;
+  };
+
   return (
-    <Wrapper>
+    <Wrapper ref={wrapperRef}>
       <MainPicWrapper
         className="mainPic"
         style={{
-          backgroundImage: `url(${pic[0]})`
+          backgroundImage: `url(${thumbnail() ?? pic[0]})`
         }}
         onMouseEnter={() => setShowArrow(true)}
         onMouseLeave={() => setShowArrow(false)}
       >
-        <Image
-          className="arrow"
-          style={{ display: showArrow ? "block" : "none" }}
-          src={arrowLeft}
-          alt="arrowLeft"
-        />
-        <Image
-          className="arrow"
-          style={{ display: showArrow ? "block" : "none" }}
-          src={arrowRight}
-          alt="arrowRight"
-        />
+        <Arrow onClick={prevImage}>
+          <Image
+            className="arrow"
+            style={{ display: showArrow ? "block" : "none" }}
+            src={arrowLeft}
+            alt="arrowLeft"
+          />
+        </Arrow>
+        <Arrow onClick={nextImage}>
+          <Image
+            className="arrow"
+            style={{ display: showArrow ? "block" : "none" }}
+            src={arrowRight}
+            alt="arrowRight"
+          />
+        </Arrow>
       </MainPicWrapper>
       <LaunchingSoonFlag
         className="launchingSoonFlag"

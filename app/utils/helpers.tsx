@@ -27,14 +27,28 @@ export const hidePhoneNumber = (text: string) => {
 
   let newDescription: React.ReactNode[] | string = text;
 
-  filtered_numbers.forEach((phoneNumber) => {
+  filtered_numbers.forEach((phoneNumber, index) => {
     newDescription = reactStringReplace(
       newDescription as string,
       phoneNumber.real,
-      () => <PhoneNumber {...phoneNumber} />,
+      () => <PhoneNumber key={index} {...phoneNumber} />,
     );
   });
 
   return newDescription;
 };
+
+export const  updateQueryString = (url: string, newParams: Record<string, string>) => {
+  const urlObj = new URL(url);
+  const currentParams = Object.fromEntries(urlObj.searchParams.entries());
+
+  // Update existing query parameters
+  const updatedParams = { ...currentParams, ...newParams };
+
+  // Set the new query parameters
+  urlObj.search = new URLSearchParams(updatedParams).toString();
+
+  return urlObj.toString();
+}
+
 
