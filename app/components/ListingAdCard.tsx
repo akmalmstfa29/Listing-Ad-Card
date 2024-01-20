@@ -240,7 +240,6 @@ const ListingAdCard = ({ data }: ListingAdCardProps) => {
   };
 
   const prevImage = () => {
-    console.log('here');
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + pic.length) % pic.length);
   };
 
@@ -259,7 +258,7 @@ const ListingAdCard = ({ data }: ListingAdCardProps) => {
       <MainPicWrapper
         className="mainPic"
         style={{
-          backgroundImage: `url(${thumbnail() ?? pic[0]})`
+          backgroundImage: `url(${thumbnail() ?? updateQueryString(pic[0], { w: String(544) })})`
         }}
         onMouseEnter={() => setShowArrow(true)}
         onMouseLeave={() => setShowArrow(false)}
