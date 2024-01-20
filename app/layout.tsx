@@ -15,6 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link href="https://fonts.cdnfonts.com/css/avenir-next-lt-pro" rel="stylesheet" />
+      </head>
       <body>
         <StyledComponentsRegistry>
           <GlobalStyles />
